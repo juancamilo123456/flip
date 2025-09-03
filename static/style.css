@@ -1,0 +1,179 @@
+/* =============================
+   Estilos generales
+============================= */
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #202124;
+}
+
+/* =============================
+   Contenedor principal
+============================= */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.container.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    box-shadow: none;
+    background: transparent;
+}
+
+/* =============================
+   Logo
+============================= */
+.logo {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.logo.small {
+    font-size: 28px;
+    margin-right: 20px;
+}
+
+/* =============================
+   Barra superior (en resultados)
+============================= */
+.top-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 1px solid #dadce0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.search-bar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.search-bar input {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #dadce0;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+}
+.search-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background: #4285F4;
+    color: white;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.search-bar button:hover {
+    background: #357ae8;
+}
+
+/* =============================
+   Buscador en index
+============================= */
+.search-box {
+    display: flex;
+    width: 60%;
+    max-width: 500px;
+}
+.search-box input {
+    flex: 1;
+    padding: 14px;
+    font-size: 18px;
+    border: 1px solid #dadce0;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+}
+.search-box button {
+    padding: 14px 20px;
+    font-size: 18px;
+    border: none;
+    background: #4285F4;
+    color: white;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.search-box button:hover {
+    background: #357ae8;
+}
+
+/* =============================
+   Resultados
+============================= */
+.results {
+    margin-top: 20px;
+}
+.result {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.result .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1a0dab;
+    text-decoration: none;
+}
+.result .title:hover {
+    text-decoration: underline;
+}
+.result .snippet {
+    margin: 8px 0;
+    color: #4d5156;
+    line-height: 1.5;
+}
+.result .url {
+    font-size: 14px;
+    color: #006621;
+}
+
+/* =============================
+   Historial
+============================= */
+.history {
+    margin-top: 30px;
+    padding: 15px;
+    background: #f1f3f4;
+    border-radius: 8px;
+}
+.history h3 {
+    margin-top: 0;
+    color: #202124;
+}
+.history ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.history li {
+    padding: 5px 0;
+    color: #5f6368;
+    font-size: 15px;
+}
+
+/* =============================
+   Extras
+============================= */
+.highlight {
+    color: #EA4335;
+    font-weight: bold;
+}
