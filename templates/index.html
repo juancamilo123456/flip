@@ -10,20 +10,14 @@
     <div class="container center">
         <h1 class="logo">Flip</h1>
         <form method="POST" class="search-box">
-            <input type="text" name="query" placeholder="Buscar en Flip..." required>
+            <input type="text" id="search-input" name="query" placeholder="Buscar en Flip..." autocomplete="off" required>
             <button type="submit">🔍</button>
         </form>
 
-        {% if history %}
-        <div class="history">
-            <h3>Historial de búsquedas</h3>
-            <ul>
-                {% for item in history %}
-                <li>🔎 {{ item }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
+        <!-- 🔹 Caja de sugerencias -->
+        <ul id="suggestions" class="suggestions-box"></ul>
     </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

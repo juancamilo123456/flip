@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import wikipedia
 
 app = Flask(__name__)
@@ -14,16 +14,14 @@ FAKE_RESULTS = [
     {"title": "React", "url": "https://reactjs.org", "snippet": "Biblioteca para construir interfaces."},
 ]
 
-search_history = []  # historial de búsquedas
-
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         query = request.form.get("query")
-        if query:
-            search_history.insert(0, query)  # guardar historial
+        results = []
 
+        if query:
             # Buscar en base ficticia
             results = [r for r in FAKE_RESULTS if query.lower() in r["title"].lower() or query.lower() in r["snippet"].lower()]
 
@@ -38,7 +36,6 @@ def index():
                         "snippet": summary
                     })
                 except wikipedia.exceptions.DisambiguationError as e:
-                    # Si la búsqueda es ambigua, mostrar algunas opciones
                     options = e.options[:5]
                     for opt in options:
                         results.append({
@@ -53,9 +50,30 @@ def index():
                         "snippet": "No se encontró información en Wikipedia."
                     })
 
-            return render_template("results.html", query=query, results=results, history=search_history)
+            return render_template("results.html", query=query, results=results)
 
-    return render_template("index.html", history=search_history)
+    return render_template("index.html")
+
+
+# 🔹 Ruta para autocompletado
+@app.route("/autocomplete")
+def autocomplete():
+    term = request.args.get("term", "").lower()
+    suggestions = []
+
+    if term:
+        # Buscar en FAKE_RESULTS
+        suggestions = [r["title"] for r in FAKE_RESULTS if term in r["title"].lower()]
+
+        # Si no hay, intentar con Wikipedia (solo títulos sugeridos)
+        if not suggestions:
+            try:
+                search_results = wikipedia.search(term, results=5)
+                suggestions.extend(search_results)
+            except:
+                pass
+
+    return jsonify(suggestions[:5])  # máximo 5 sugerencias
 
 
 if __name__ == "__main__":

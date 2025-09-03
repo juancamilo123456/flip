@@ -1,24 +1,19 @@
-// Función para usar historial como nueva búsqueda
-function useSuggestion(text) {
-    document.getElementById("search-input").value = text;
-    document.querySelector("form").submit();
-}
-
-// Autocompletado con AJAX
 document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("search-input");
     const suggestionsBox = document.getElementById("suggestions");
+    const form = document.querySelector("form");
 
     if (!input) return;
 
     input.addEventListener("input", () => {
         const query = input.value.trim();
         if (query.length === 0) {
+            suggestionsBox.innerHTML = "";
             suggestionsBox.style.display = "none";
             return;
         }
 
-        fetch(`/autocomplete?term=${query}`)
+        fetch(`/autocomplete?term=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
                 suggestionsBox.innerHTML = "";
@@ -28,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         li.textContent = item;
                         li.onclick = () => {
                             input.value = item;
-                            document.querySelector("form").submit();
+                            form.submit();
                         };
                         suggestionsBox.appendChild(li);
                     });
@@ -36,7 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     suggestionsBox.style.display = "none";
                 }
-            });
+            })
+            .catch(err => console.error("Error en autocompletado:", err));
     });
 
     // Ocultar sugerencias si se hace clic afuera
